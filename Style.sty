@@ -1,0 +1,249 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 中国研究生电子设计竞赛模版
+%% 作者：安东
+%% 最后更改于2024/05/25
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% 在"北京大学课程论文模板"基础上修改而来
+%% 原作者：Shawn Wang
+%% Overleaf地址：https://www.overleaf.com/latex/templates/bei-jing-da-xue-ke-cheng-lun-wen-mo-ban/yntmqcktrzfh
+
+\ProvidesPackage{SHUReport}
+
+%% 页边距
+\RequirePackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm]{geometry}
+
+%% 一些必要的宏包
+\RequirePackage[unicode=true,colorlinks,urlcolor=black,linkcolor=black,bookmarksnumbered=true]{hyperref}
+\RequirePackage{latexsym,amssymb,amsmath,amsbsy,amsopn,amstext,amsthm,amsxtra,color,bm,calc,ifpdf}
+\RequirePackage{graphicx}
+\RequirePackage{enumerate}
+\RequirePackage{fancyhdr}
+\RequirePackage{listings}
+\RequirePackage{multirow}
+\RequirePackage{makeidx}
+\RequirePackage{xcolor}
+\RequirePackage{fontspec}
+\RequirePackage{subfigure}
+\PassOptionsToPackage{hyphens}{url}
+\RequirePackage{hyperref}
+\RequirePackage{pythonhighlight}
+\RequirePackage{tcolorbox}
+\RequirePackage{fontawesome}
+\RequirePackage{chngcntr}
+\RequirePackage{caption}
+
+% 每章重新编号
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+
+% 设置图表编号格式为 图1-1, 图1-2, ...
+\renewcommand{\thefigure}{\thesection-\arabic{figure}}
+\renewcommand{\thetable}{\thesection-\arabic{table}}
+
+% 设置图表编号格式
+\captionsetup[figure]{labelsep=period}
+\captionsetup[table]{labelsep=period}
+
+% 更改摘要二字的样式
+\renewcommand{\abstractname}{\textbf{\large {摘\quad 要}}} 
+
+% 可固定下划线长度
+\makeatletter
+\newcommand\dlmu[2][4cm]{\hskip1pt\underline{\hb@xt@ #1{\hss#2\hss}}\hskip3pt}
+\makeatother
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=Magenta,
+    citecolor=black,
+}
+
+% 对一些autoref的中文引用名作修改
+\def\equationautorefname{式}
+\def\footnoteautorefname{脚注}
+\def\itemautorefname{项}
+\def\figureautorefname{图}
+\def\tableautorefname{表}
+\def\partautorefname{篇}
+\def\appendixautorefname{附录}
+\def\chapterautorefname{章}
+\def\sectionautorefname{节}
+\def\subsectionautorefname{小节}
+\def\subsubsectionautorefname{小小节}
+\def\paragraphautorefname{段落}
+\def\subparagraphautorefname{子段落}
+\def\FancyVerbLineautorefname{行}
+\def\theoremautorefname{定理}
+
+\newtheorem{Theorem}{定理}[section]
+\newtheorem{Lemma}[Theorem]{引理}
+\newtheorem{Corollary}[Theorem]{推论}
+\newtheorem{Proposition}[Theorem]{命题}
+\newtheorem{Definition}[Theorem]{定义}
+\newtheorem{Example}[Theorem]{例}
+
+% 参考文献设置
+\newcommand{\reference}{
+%\nocite{*}   %打开此选项会列出bib里面的所有参考文献
+\bibliographystyle{unsrt} %规定了参考文献的格式
+\begin{center}%居中
+    \bibliography{reference} %调出LaTeX生成参考文献列表
+\end{center}
+}
+
+% 文本框设置
+\newcommand{\tbox}[1]{
+\begin{center}
+\begin{tcolorbox}[colback=gray!10,%gray background
+                  colframe=black,% black frame colour
+                  width=8cm,% Use 8cm total width,
+                  arc=1mm, auto outer arc,
+                  boxrule=0.5pt,
+                 ]
+{#1}
+\end{tcolorbox}
+\end{center}
+}
+
+% 页眉设置
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % 清除默认的页眉页脚
+
+% 设置页眉内容
+\fancyhead[L]{}
+\fancyhead[C]{\fangsong 第十九届中国研究生电子设计竞赛 \\ **}
+\fancyhead[R]{}
+
+% 设置页脚内容
+\fancyfoot[C]{}
+\fancyfoot[R]{\thepage} % 页码放到每一页下方的右侧
+
+% 正文页码从正文开始
+\newcommand{\startpagination}{
+    \pagenumbering{arabic} % 将页码设置为阿拉伯数字
+}
+
+% 章节标题设置
+\ctexset{
+    section = {
+        format+={\centering\heiti\zihao{2}},
+        name={第,章},
+        number = \chinese{section},
+        beforeskip = 20pt,
+        afterskip = 20pt,
+    },
+    subsection = {
+        format+={\heiti\zihao{3}},
+        name={},
+        number = \arabic{section}.\arabic{subsection},
+        beforeskip = 18pt,
+        afterskip = 18pt,
+    },
+    subsubsection = {
+        format+={\heiti\zihao{4}},
+        name={},
+        number = \arabic{section}.\arabic{subsection}.\arabic{subsubsection},
+        beforeskip = 16pt,
+        afterskip = 16pt,
+    },
+    paragraph = {
+        format+={\heiti\zihao{4}},
+        name={},
+        number = \arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph},
+        beforeskip = 14pt,
+        afterskip = 14pt,
+    },
+    subparagraph = {
+        format+={\heiti\zihao{4}},
+        name={},
+        number = \arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}.\arabic{subparagraph},
+        beforeskip = 12pt,
+        afterskip = 12pt,
+    }
+}
+
+% 封面设置
+\newcommand{\cover}{
+    \begin{titlepage}
+        \centering
+        \vspace*{2cm}
+        {\heiti\zihao{1} 第十九届中国研究生电子设计竞赛 \par}
+        \vspace{1.5cm}
+        {\heiti\zihao{2} 技术论文 \par}
+        \vspace{2.5cm}
+
+        {\heiti\zihao{3} 论文题目（中文）：\dlmu[10cm]{**} \par}
+        \vspace{0.5cm}
+        {\heiti\zihao{3} 论文题目（英文）：\dlmu[10cm]{**} \par}
+        \vspace{0.5cm}
+        {\heiti\zihao{3} 参赛单位：\dlmu[12cm]{**} \par}
+        \vspace{0.5cm}
+        {\heiti\zihao{3} 队伍名称：\dlmu[12cm]{**} \par}
+        \vspace{0.5cm}
+        {\heiti\zihao{3} 指导老师：\dlmu[12cm]{**} \par}
+        \vspace{0.5cm}
+        {\heiti\zihao{3} 参赛队员：\dlmu[12cm]{**} \par}
+        \vspace{0.5cm}
+        {\heiti\zihao{3} 完成时间：\dlmu[12cm]{***} \par}
+        \vfill
+    \end{titlepage}
+}
+
+% 目录设置
+\newcommand{\maketoc}{
+    \newpage
+    \begin{center}
+        {\heiti\zihao{3} 目    录}
+    \end{center}
+    \tableofcontents
+    \newpage
+}
+
+% 摘要设置
+\renewenvironment{abstract}{
+    \par\noindent
+    \begin{center} % 使“摘要”两个字居中
+        \textbf{\large 摘要}
+    \end{center}
+    \vspace{0.5em}
+    \begingroup
+    \leftskip=2em
+    \rightskip=2em
+    \noindent\ignorespaces
+}{
+    \par\endgroup
+}
+
+% 关键词设置
+\newenvironment{keywords}{
+    \par\noindent
+    \leftskip = 2em
+    \textbf{关键词：}\ignorespaces
+}{
+    \par
+    \newpage
+}
+
+% 英文关键词设置
+\newenvironment{keywords_En}{
+    \par\noindent
+    \leftskip = 2em
+    \textbf{Keywords: }\ignorespaces
+}{
+    \par
+    \newpage
+}
+
+% 正文格式设置
+\setlength{\parindent}{2em} % 首行缩进
+\setlength{\parskip}{0pt plus 1pt} % 段间距
+\linespread{1.5} % 行间距
+
+% 设置固定行间距为20pt
+\setlength{\lineskip}{20pt}
+
+\endinput
